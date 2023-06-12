@@ -13,7 +13,9 @@ SleepCycles(
   treat_as_N3 = NA,
   rm_incomplete_period = FALSE,
   plot = TRUE,
-  REMP_length = 10
+  REMP_length = 10,
+  sp = ",",
+  hd = "y"
 )
 }
 \arguments{
@@ -77,7 +79,7 @@ data(sleepstages)
 olddir <- getwd()
 newdir <- file.path(tempdir(),"SleepCycles_exmpl")
 dir.create(newdir, showWarnings = FALSE)
-write.table(sleepstages, file = paste(newdir, "sleepstages.vmrk", sep = "/"), 
+write.table(sleepstages, file = paste(newdir, "sleepstages.vmrk", sep = "/"),
 row.names=FALSE, col.names = FALSE, quote = FALSE, sep = ",")
 SleepCycles(newdir, filetype = "vmrk")
 setwd(olddir)
