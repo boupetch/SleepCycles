@@ -233,3 +233,34 @@ SleepCycles <- function(p, sleepstart = "N1", files = NA, filetype = "txt", trea
     }
   }
 }
+
+#' @export
+format_events <- function(events){
+
+  events.vmrk = data.frame(Description = as.character(events$event))
+  events.vmrk$Description[events.vmrk$Description == "AWA"] = 0
+  events.vmrk$Description[events.vmrk$Description == "N1"] = 1
+  events.vmrk$Description[events.vmrk$Description == "N2"] = 2
+  events.vmrk$Description[events.vmrk$Description == "N3"] = 3
+  events.vmrk$Description[events.vmrk$Description == "REM"] = 5
+  events.vmrk$Description = as.integer(events.vmrk$Description)
+  events.vmrk$Type = "SleepStage"
+  events.vmrk = events.vmrk[,c(2,1)]
+
+  newdir <- file.path(
+    tempdir(),
+    paste0(
+      "SleepCycles-",
+      substr(paste(sample(1:1000),collapse=''),1,10)))
+
+  dir.create(newdir, showWarnings = FALSE)
+
+  write.table(
+    events.vmrk,
+    file = paste(newdir, "events.txt", sep = "/"),
+    row.names=FALSE,
+    col.names = TRUE,
+    quote = FALSE,
+    sep = ",")
+  return(newdir)
+}
