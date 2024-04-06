@@ -15,7 +15,8 @@ Imports:
 	reshape2,
 	plyr,
 	stringr,
-	viridis
+	viridis,
+	rsleep
 Language: en-GB
 LazyData: true
 Roxygen: list(markdown = TRUE)
